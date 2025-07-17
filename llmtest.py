@@ -22,7 +22,7 @@ def send_prompt(message_content, model="qwen/qwen-2.5-72b-instruct:free", system
     payload = {
         "model": model,
         "messages": messages,
-        "max_tokens": 4000,
+        "max_tokens": 10000,
     }
 
     response = requests.post(
