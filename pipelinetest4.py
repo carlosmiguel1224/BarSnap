@@ -56,9 +56,9 @@ Return the result as a JSON array like:
 Only return the full valid JSON array. No extra characters, no trailing commas, and no text before or after.
 """
     
-    print(f"Cleaned ocr: {clean_ocr_labels}")
+    
     response = send_prompt(prompt)
-    print(response)
+    
     raw_input = extract_clean_input_terms(pre_parser(response))
     safe_input = safe_json_parse(raw_input)
 
