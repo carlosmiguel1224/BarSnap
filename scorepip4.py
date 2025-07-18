@@ -2,6 +2,7 @@ import sqlite3
 from collections import defaultdict, deque
 from itertools import chain, combinations
 import pandas as pd
+from all_ingredientsflatlist import ALL_INGREDIENTS
 
 # --- CONFIG ---
 DB_PATH = 'cocktails.db'
@@ -765,6 +766,14 @@ def run_ranked_query(input_terms):
     # Sort: highest completeness first, then longest match
     results = sorted(results, key=lambda x: (-x[2], -len(x[1])))
     return results
+
+
+def filter_known_ingredients(input_ingredients: list[str]) -> list[str]:
+    """Return only the ingredients that are in the known all_ingredients list."""
+    known_set = set(ALL_INGREDIENTS)
+    return [item for item in input_ingredients if item.lower() in known_set]
+
+
 
 # --- Testing section ---
 if __name__ == "__main__":

@@ -63,9 +63,9 @@ Only return the full valid JSON array. No extra characters, no trailing commas, 
     safe_input = safe_json_parse(raw_input)
 
     combined_ingredients = list(set(safe_input + user_ingredients))
-
+    cleaned_combined = filter_known_ingredients(combined_ingredients)
     # Run the cocktail matcher
-    df = run_ranked_query(combined_ingredients)
+    df = run_ranked_query(cleaned_combined)
    
     df = pd.DataFrame(df, columns=["Drink", "Matched Inputs", "Completeness", "Label"])
     
