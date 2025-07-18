@@ -40,6 +40,24 @@ def send_prompt(message_content, model="qwen/qwen-2.5-72b-instruct:free", system
         return None
 
 
+
+MODEL_PRIORITY = [
+    "qwen/qwen-2.5-72b-instruct:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "mistralai/mistral-7b-instruct:free",
+]
+
+
+def call_model_with_fallback(prompt):
+    for model in MODEL_PRIORITY:
+        try:
+            return send_prompt(prompt, model)  # Your existing API call
+        except Exception as e:
+            print(f"Error using {model}: {e}")
+    raise Exception("All models failed.")
+
+
+
 def main():
     image_path = "IMG_8921.png"
     ocr_labels = run_easyocr(image_path)

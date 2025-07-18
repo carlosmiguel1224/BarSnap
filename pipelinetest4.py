@@ -57,7 +57,7 @@ Only return the full valid JSON array. No extra characters, no trailing commas, 
 """
     
     
-    response = send_prompt(prompt)
+    response = call_model_with_fallback(prompt)
     
     raw_input = extract_clean_input_terms(pre_parser(response))
     safe_input = safe_json_parse(raw_input)
